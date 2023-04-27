@@ -7,11 +7,14 @@ import { setStatusFilter } from "../../redux/actions";
 
 // I want to render Status element:
 export const StatusFilter = () => {
+  // Get a link to the action dispatch function
   const dispatch = useDispatch();
 
   // I want to read which status is actual active, so I use useSelector:
   const filter = useSelector(getStatusFilter);
 
+  //  Call the action generator and pass the filter value
+  // Sending the result - filter change action
   const handleFilterChange = (filter) => dispatch(setStatusFilter(filter));
   return (
     <>

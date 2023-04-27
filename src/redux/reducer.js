@@ -76,6 +76,19 @@ const filtersInitialState = {
 //   return state;
 // };
 
+// Use initialState as default state value
+// export const rootReducer = (state = initialState, action) => {
+//   // The reducer distinguishes between actions by the value of the type property
+//   switch (action.type) {
+//     // Depending on the type of action, different logic will be executed
+//     default:
+//       // Each reducer receives all actions sent to the store.
+//       // If the reducer should not process some type of action,
+//       // must return the existing state unchanged.
+//       return state;
+//   }
+// };
+
 // // example: type: "filters/setStatusFilter"
 // export const rootReducer = (state = initialState, action) => {
 //   switch (action.type) {
@@ -96,6 +109,50 @@ const filtersInitialState = {
 //       return state;
 //   }
 // };
+
+// "tasks/addTask"
+// const rootReducer = (state = initialState, action) => {
+//   // Reducer realizuje akcje po wartości właściwości type
+//   switch (action.type) {
+//     // W zależności od rodzaju akcji będzie się wykonywała inna logika
+//     case "tasks/addTask": {
+//       // Należy zwrócić nowy obiekt statusu
+//       return {
+//         // w którym są wszystkie dane istniejącego statusu
+//         ...state,
+//         // i nowa tablica zadań
+//         tasks: [
+//           // w której są wszystkie istniejące zadania
+//           ...state.tasks,
+//           // i obiekt nowego zadania
+//           action.payload,
+//         ],
+//       };
+//     }
+//     default:
+//       // Każdy reducer otrzymuje wszystkie akcje wysłane do store.
+//       // Jeśli reducer nie powinien opracowywać jakiegoś typu akcji,
+//       // należy zwrócić istniejący status bez zmian.
+//       return state;
+//   }
+// };
+
+// End code:
+// export const rootReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case "tasks/addTask":
+//       return { ...state, tasks: [...state.tasks, action.payload] };
+//     case "tasks/deleteTask":
+//       return {
+//         ...state,
+//         tasks: state.tasks.filter((task) => task.id !== action.payload),
+//       };
+//     default:
+//       return state;
+//   }
+// };
+
+// The same in functions:
 
 export const tasksReducer = (state = tasksInitialState, action) => {
   switch (action.type) {
@@ -127,6 +184,16 @@ export const filtersReducer = (state = filtersInitialState, action) => {
 
 // export const rootReducer = (state = {}, action) => {
 //   return {
+//     tasks: tasksReducer(state.tasks, action),
+//     filters: filtersReducer(state.filters, action),
+//   };
+// };
+
+// //  Kod reducerów tasksReducer i filtersReducerexport
+// const rootReducer = (state = {}, action) => {
+//   // Zwracamy obiekt statusu
+//   return {
+//     // Obu reducerom przekazujemy tylko tę część statusu, za którą odpowiadają
 //     tasks: tasksReducer(state.tasks, action),
 //     filters: filtersReducer(state.filters, action),
 //   };
