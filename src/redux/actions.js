@@ -74,7 +74,7 @@ export const addTask = (text) => {
 
 export const setStatusFilter = (value) => {
   return {
-    type: "filters/getStatusFilter",
+    type: "filters/setStatusFilter",
     payload: value,
   };
 };
