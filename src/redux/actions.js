@@ -60,15 +60,15 @@ export const addTask = (text) => {
     type: "tasks/addTask",
     payload: {
       id: nanoid(),
-      text: text,
       completed: false,
+      text,
     },
   };
 };
 
 // 4.
 // export const setStatusFilter = {
-//   type: "filters/getStatusFilter",
+//   type: "filters/setStatusFilter",
 //   payload: "filter value",
 // };
 

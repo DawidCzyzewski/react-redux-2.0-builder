@@ -1,9 +1,9 @@
 // It's good to create something like enum if it is constant for all project to avoid errors if we write somewhere badly
 // Something like enum to status:
 export const statusFilters = Object.freeze({
-  all: "All",
-  active: "Active",
-  completed: "Completed",
+  all: "all",
+  active: "active",
+  completed: "completed",
 });
 
 // statusFilters.active;

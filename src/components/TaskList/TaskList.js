@@ -1,8 +1,20 @@
 import { useSelector } from "react-redux";
-import { getVisibleTasks } from "../../utils/getVisibleTasks";
+// import { getVisibleTasks } from "../../utils/getVisibleTasks";
 import { Task } from "../Task/Task";
 import { getStatusFilter, getTasks } from "../../redux/selectors";
 import styles from "./TaskList.module.css";
+import { statusFilters } from "../../redux/constants";
+
+const getVisibleTasks = (tasks, statusFilter) => {
+  switch (statusFilter) {
+    case statusFilters.active:
+      return tasks.filter((task) => !task.completed);
+    case statusFilters.completed:
+      return tasks.filter((task) => task.completed);
+    default:
+      return tasks;
+  }
+};
 
 // Task no need any props, becouse it's getting props from redux
 export const TaskList = () => {

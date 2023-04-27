@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { statusFilters } from "./constants";
 
 // It's good practice to start with idea of feature states, which will be changed
 // const initialState = {
@@ -62,9 +63,13 @@ const tasksInitialState = [
   },
 ];
 
+// const filtersInitialState = {
+//   status: "Active",
+//   numberOfClicked: 0,
+// };
+
 const filtersInitialState = {
-  status: "Active",
-  numberOfClicked: 0,
+  status: statusFilters.all,
 };
 
 //  createStore have 1, 2 or 3 arguments. First is main reducer, which is responsible for changing status. Later I will write my own reducers.
@@ -154,8 +159,26 @@ const filtersInitialState = {
 
 // The same in functions:
 
-export const tasksReducer = (state = tasksInitialState, action) => {
+// export const tasksReducer = (state = tasksInitialState, action) => {
+//   switch (action.type) {
+//     default:
+//       return state;
+//   }
+// };
+
+const tasksReducer = (state = tasksInitialState, action) => {
   switch (action.type) {
+    case "tasks/addTask":
+      return [...state, action.payload];
+    case "tasks/deleteTask":
+      return state.filter((task) => task.id !== action.payload);
+    case "tasks/toggleCompleted":
+      return state.map((task) => {
+        if (task.id !== action.payload) {
+          return task;
+        }
+        return { ...task, completed: !task.completed };
+      });
     default:
       return state;
   }

@@ -1,6 +1,7 @@
 import css from "./TaskForm.module.css";
 import { useDispatch } from "react-redux";
 import { addTask } from "../../redux/actions";
+import { Button } from "../Button/Button";
 
 export const TaskForm = () => {
   // Create constant to use sending to state function dispatch
@@ -23,7 +24,7 @@ export const TaskForm = () => {
         name="text"
         placeholder="Enter task text..."
       />{" "}
-      <button type="submit">Add task</button>{" "}
+      <Button type="submit">Add task</Button>{" "}
     </form>
   );
 };
