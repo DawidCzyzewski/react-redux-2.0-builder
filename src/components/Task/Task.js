@@ -11,6 +11,7 @@
 import css from "./Task.module.css";
 import { useDispatch } from "react-redux";
 import { deleteTask, toggleCompleted } from "../../redux/actions";
+import { MdClose } from "react-icons/md";
 
 export const Task = ({ task }) => {
   // Get a link to the action dispatch function
@@ -34,7 +35,7 @@ export const Task = ({ task }) => {
       />
       <p className={css.text}>{task.text}</p>
       <button type="button" onClick={handleDelete} className={css.btn}>
-        Delete
+        <MdClose />
       </button>
     </div>
   );

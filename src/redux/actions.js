@@ -1,80 +1,53 @@
-// Every action is an object with two elements: type which is string and payload which can be everything. To payload is going callback what we done
+// import { nanoid } from "nanoid";
 
-import { nanoid } from "nanoid";
+// export const toggleCompleted = (taskId) => {
+//   return {
+//     type: "tasks/toggleCompleted",
+//     payload: taskId,
+//   };
+// };
 
-// In type I can write what is connected with this action, slash, name of action what you are doing
-// const action = {
-//     type: "Action type",
-//     // payload: "Some payload"
+// export const deleteTask = (taskId) => {
+//   return {
+//     type: "tasks/deleteTask",
+//     payload: taskId,
+//   };
+// };
+
+// export const addTask = (text) => {
+//   return {
+//     type: "tasks/addTask",
 //     payload: {
-
-//     }
-// }
-
-// So let's create code to my task menager!
-
-// Wanted actions:
-// 1. check as true/false
-// 2. delete item
-// 3. new task
-// 4. change filter status
-
-// 1.
-// export const toggleCompleted = {
-//   type: "tasks/toggleCompleted",
-//   payload: "taskId",
+//       id: nanoid(),
+//       completed: false,
+//       text,
+//     },
+//   };
 // };
 
-export const toggleCompleted = (taskId) => {
-  return {
-    type: "tasks/toggleCompleted",
-    payload: taskId,
-  };
-};
-
-// 2.
-// export const deleteTask = {
-//   type: "tasks/deleteTask",
-//   payload: "taskId",
+// export const setStatusFilter = (value) => {
+//   return {
+//     type: "filters/setStatusFilter",
+//     payload: value,
+//   };
 // };
 
-export const deleteTask = (taskId) => {
-  return {
-    type: "tasks/deleteTask",
-    payload: taskId,
-  };
-};
+// ----------------------redux abrove-----------
+// ----------------------redux toolkit under----
 
-// 3.
-// export const addTask = {
-//   type: "tasks/addTask",
-//   payload: {
-//     id: "generate some id",
-//     text: "some text",
-//     completed: false,
-//   },
-// };
+import { createAction, nanoid } from "@reduxjs/toolkit";
 
-export const addTask = (text) => {
-  return {
-    type: "tasks/addTask",
-    payload: {
-      id: nanoid(),
-      completed: false,
-      text,
-    },
-  };
-};
+export const toggleCompleted = createAction("tasks/toggleCompleted");
+// console.log("toggleCompleted.type in actions: ", toggleCompleted.type);
+// console.log("toggleCompleted.toString() in actions: ", toggleCompleted.toString());
 
-// 4.
-// export const setStatusFilter = {
-//   type: "filters/setStatusFilter",
-//   payload: "filter value",
-// };
+// export const addTask = createAction("tasks/addTask");
+// second argument is prepareAction, it's function
+// createAction(type, prepareAction)
+export const addTask = createAction("tasks/addTask", (text) => {
+  return { payload: { text, id: nanoid(), completed: false } };
+});
 
-export const setStatusFilter = (value) => {
-  return {
-    type: "filters/setStatusFilter",
-    payload: value,
-  };
-};
+export const deleteTask = createAction("tasks/deleteTask");
+
+export const setStatusFilter = createAction("filters/setStatusFilter");
