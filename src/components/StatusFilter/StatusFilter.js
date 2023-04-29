@@ -1,23 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-
-import { statusFilters } from "../../redux/constants";
+import { useFilter } from "../../contexts/filterContext";
 import { Button } from "../Button/Button";
-import { getStatusFilter } from "../../redux/selectors";
-
 import styles from "./StatusFilter.module.css";
-import { setStatusFilter } from "../../redux/actions";
 
 // I want to render Status element:
 export const StatusFilter = () => {
-  // Get a link to the action dispatch function
-  const dispatch = useDispatch();
+  // const filters = useFilter()
+  const { status, setStatus, statusFilters } = useFilter();
 
-  // I want to read which status is actual active, so I use useSelector:
-  const filter = useSelector(getStatusFilter);
+  const filter = status;
 
-  //  Call the action generator and pass the filter value
-  // Sending the result - filter change action
-  const handleFilterChange = (filter) => dispatch(setStatusFilter(filter));
+  const handleFilterChange = (filter) => setStatus(filter);
   return (
     <>
       <div className={styles.wrapper}>

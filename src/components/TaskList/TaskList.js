@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux";
-// import { getVisibleTasks } from "../../utils/getVisibleTasks";
 import { Task } from "../Task/Task";
 import { getStatusFilter, getTasks } from "../../redux/selectors";
 import styles from "./TaskList.module.css";
 import { statusFilters } from "../../redux/constants";
+import { useFilter } from "../../contexts/filterContext";
 
 const getVisibleTasks = (tasks, statusFilter) => {
   switch (statusFilter) {
@@ -16,18 +16,12 @@ const getVisibleTasks = (tasks, statusFilter) => {
   }
 };
 
-// Task no need any props, becouse it's getting props from redux
 export const TaskList = () => {
-  // getting tasks:
-  // const tasks = useSelector((state) => state.tasks);
-  // Instead of this using created function:
   const tasks = useSelector(getTasks);
 
-  // getting selected status:
-  const statusFilter = useSelector(getStatusFilter);
+  const { status } = useFilter();
 
-  // connecting tasks with actual status:
-  const visibleTasks = getVisibleTasks(tasks, statusFilter);
+  const visibleTasks = getVisibleTasks(tasks, status);
 
   return (
     <ul className={styles.list}>
