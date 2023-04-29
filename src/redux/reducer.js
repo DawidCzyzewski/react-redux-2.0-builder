@@ -84,7 +84,7 @@ import {
 } from "./actions";
 import { statusFilters } from "./constants";
 
-const tasksInitialState = [
+export const tasksInitialState = [
   {
     id: 0,
     text: "Learn HTML and CSS",
@@ -112,40 +112,41 @@ const tasksInitialState = [
   },
 ];
 
+// I comment it to createSlice, uncomment if createAction
+// export const tasksReducer = createReducer(tasksInitialState, {
+//   [addTask]: (state, action) => {
+//     // return [...state, action.payload];
+
+//     // And after install immer I can write like this:
+//     state.push(action.payload);
+//   },
+//   [toggleCompleted]: (state, action) => {
+//     // return state.map((task) => {
+//     //   if (task.id !== action.payload) {
+//     //     return task;
+//     //   }
+//     //   return { ...task, completed: !task.completed };
+//     // });
+
+//     // And after install immer I can write like this:
+//     for (const task of state) {
+//       if (task.id === action.payload) {
+//         task.completed = !task.completed;
+//       }
+//     }
+//   },
+//   [deleteTask]: (state, action) => {
+//     return state.filter((task) => task.id !== action.payload);
+
+//     // And after install immer I can write like this but in this case it's worst than without:
+//     // const index = state.findIndex((task) => task.id === action.payload);
+//     // state.splice(index, 1);
+//   },
+// });
+
 const filtersInitialState = {
   status: statusFilters.all,
 };
-
-export const tasksReducer = createReducer(tasksInitialState, {
-  [addTask]: (state, action) => {
-    // return [...state, action.payload];
-
-    // And after install immer I can write like this:
-    state.push(action.payload);
-  },
-  [toggleCompleted]: (state, action) => {
-    // return state.map((task) => {
-    //   if (task.id !== action.payload) {
-    //     return task;
-    //   }
-    //   return { ...task, completed: !task.completed };
-    // });
-
-    // And after install immer I can write like this:
-    for (const task of state) {
-      if (task.id === action.payload) {
-        task.completed = !task.completed;
-      }
-    }
-  },
-  [deleteTask]: (state, action) => {
-    return state.filter((task) => task.id !== action.payload);
-
-    // And after install immer I can write like this but in this case it's worst than without:
-    // const index = state.findIndex((task) => task.id === action.payload);
-    // state.splice(index, 1);
-  },
-});
 
 export const filtersReducer = (state = filtersInitialState, action) => {
   switch (action.type) {

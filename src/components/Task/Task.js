@@ -10,7 +10,11 @@
 
 import css from "./Task.module.css";
 import { useDispatch } from "react-redux";
-import { deleteTask, toggleCompleted } from "../../redux/actions";
+// import { deleteTask, toggleCompleted } from "../../redux/actions";
+
+// changed to slice:
+import { deleteTask, toggleCompleted } from "../../redux/taskSlice";
+
 import { MdClose } from "react-icons/md";
 
 export const Task = ({ task }) => {

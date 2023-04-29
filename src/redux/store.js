@@ -8,10 +8,24 @@
 
 // ----------------------redux abrove-----------
 // ----------------------redux toolkit under----
-import { tasksReducer, filtersReducer } from "./reducer";
+
+// import { tasksReducer, filtersReducer } from "./reducer";
+
+// Ver for createSlice:
+import { filtersReducer } from "./reducer";
+
+import { tasksReducer } from "./taskSlice";
 const { configureStore } = require("@reduxjs/toolkit");
 
 // No need to adding enhancer, becouse it's included
+// export const store = configureStore({
+//   reducer: {
+//     tasks: tasksReducer,
+//     filters: filtersReducer,
+//   },
+// });
+
+// Ver for createSlice:
 export const store = configureStore({
   reducer: {
     tasks: tasksReducer,
