@@ -1,21 +1,16 @@
 import css from "./TaskForm.module.css";
-import { useDispatch } from "react-redux";
-// import { addTask } from "../../redux/actions";
-// Used to slice:
-import { addTask } from "../../redux/taskSlice";
+
 import { Button } from "../Button/Button";
+import { useTask } from "../../contexts/taskContext";
 
 export const TaskForm = () => {
-  // Create constant to use sending to state function dispatch
-  const dispatch = useDispatch();
+  const { addTask } = useTask();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
 
-    // Call the action generator and pass the task text for the payload field
-    //  Send the result - task creating action
-    dispatch(addTask(form.elements.text.value));
+    addTask(form.elements.text.value);
     form.reset();
   };
   return (
@@ -25,7 +20,7 @@ export const TaskForm = () => {
         type="text"
         name="text"
         placeholder="Enter task text..."
-      />{" "}
+      />
       <Button type="submit">Add task</Button>{" "}
     </form>
   );

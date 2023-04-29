@@ -4,6 +4,7 @@ import { getStatusFilter, getTasks } from "../../redux/selectors";
 import styles from "./TaskList.module.css";
 import { statusFilters } from "../../redux/constants";
 import { useFilter } from "../../contexts/filterContext";
+import { useTask } from "../../contexts/taskContext";
 
 const getVisibleTasks = (tasks, statusFilter) => {
   switch (statusFilter) {
@@ -17,7 +18,7 @@ const getVisibleTasks = (tasks, statusFilter) => {
 };
 
 export const TaskList = () => {
-  const tasks = useSelector(getTasks);
+  const { tasks } = useTask();
 
   const { status } = useFilter();
 
