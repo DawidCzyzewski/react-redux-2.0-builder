@@ -4,7 +4,11 @@ import { Button } from "../Button/Button";
 import { useTask } from "../../contexts/taskContext";
 
 export const TaskForm = () => {
+  // 1. option
   const { addTask } = useTask();
+  // 2. option
+  // const tasks = useTask()
+  // tasks.addTask
 
   const handleSubmit = (event) => {
     event.preventDefault();

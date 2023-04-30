@@ -3,7 +3,6 @@ import { MdClose } from "react-icons/md";
 import { useTask } from "../../contexts/taskContext";
 
 export const Task = ({ task }) => {
-
   const { deleteTask, toggleCompleted } = useTask();
 
   const handleDelete = () => deleteTask(task.id);
@@ -20,7 +19,7 @@ export const Task = ({ task }) => {
       />
       <p className={css.text}>{task.text}</p>
       <button type="button" onClick={handleDelete} className={css.btn}>
-        <MdClose />
+        <MdClose size={24} />
       </button>
     </div>
   );
