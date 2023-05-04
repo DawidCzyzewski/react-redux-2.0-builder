@@ -1,23 +1,41 @@
-// import { useSelector } from "react-redux";
-// import { StatusFilter } from "./components/StatusFilter/StatusFilter";
 import { TaskList } from "./components/TaskList/TaskList";
 import { TaskForm } from "./components/TaskForm/TaskForm";
 import { Layout } from "./components/Layout/Layout";
 import { AppBar } from "./components/AppBar/AppBar";
+import { useDispatch, useSelector } from "react-redux";
+import { getTasks } from "./redux/selectors";
+import { useEffect } from "react";
+import { fetchTasks } from "./redux/operations";
+
+// in selectors there is getTasks. it takes state.tasks from store.js in reducer and tasks are from taskSlice from initial state
 
 const App = () => {
-  // const value = useSelector((state) => state.tasks[0].text);
-  // const value1 = useSelector((state) => state.tasks[1]);
+  // Dispatch is activated only once, but I use it in useEffect becouse I should put in ended array all const used in it. No matter if I don't use it, but it will be warning
+  const dispatch = useDispatch();
+  const { items, isLoading, error } = useSelector(getTasks);
+
+  useEffect(() => {
+    dispatch(fetchTasks());
+  }, [dispatch]);
 
   return (
-    <>
-      <Layout>
-        <AppBar />
-        <TaskForm />
-        <TaskList />
-      </Layout>
-    </>
+    <div>
+      {isLoading && <h1>Loading!</h1>}
+      {error && <p>{error} </p>}
+
+      <div>{items.length > 0 && JSON.stringify(items)}</div>
+    </div>
   );
+
+  // return (
+  //   <>
+  //     <Layout>
+  //       <AppBar />
+  //       <TaskForm />
+  //       <TaskList />
+  //     </Layout>
+  //   </>
+  // );
 };
 
 export default App;
