@@ -1,15 +1,23 @@
-import { useFilter } from "../../contexts/filterContext";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../Button/Button";
+import { statusFilters } from "../../redux/constants";
+import { getStatusFilter } from "../../redux/selectors";
+import { setStatusFilter } from "../../redux/actions";
 import styles from "./StatusFilter.module.css";
+// import { useFilter } from "../../contexts/filterContext";
 
 // I want to render Status element:
 export const StatusFilter = () => {
   // const filters = useFilter()
-  const { status, setStatus, statusFilters } = useFilter();
+  // const { status, setStatus, statusFilters } = useFilter();
 
-  const filter = status;
+  // const filter = status;
+  // const handleFilterChange = (filter) => setStatus(filter);
 
-  const handleFilterChange = (filter) => setStatus(filter);
+  const dispatch = useDispatch();
+  const filter = useSelector(getStatusFilter);
+  const handleFilterChange = (filter) => dispatch(setStatusFilter(filter));
+
   return (
     <>
       <div className={styles.wrapper}>

@@ -9,7 +9,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 //   fetchingSuccess,
 // } from "./taskSlice";
 
-axios.defaults.baseURL = "https://62584f320c918296a49543e7.mockapi.io/";
+axios.defaults.baseURL = "https://62584f320c918296a49543e7.mockapi.io";
 
 // export const fetchTasks = () => async (dispatch) => {
 //   try {
@@ -33,8 +33,8 @@ export const fetchTasks = createAsyncThunk(
     try {
       const response = await axios.get("/tasks");
       return response.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
@@ -45,8 +45,8 @@ export const addTask = createAsyncThunk(
     try {
       const response = await axios.post("/tasks", { text });
       return response.data;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
