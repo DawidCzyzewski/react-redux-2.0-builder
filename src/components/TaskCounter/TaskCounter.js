@@ -1,13 +1,26 @@
 import styles from "./TaskCounter.module.css";
-import { useTask } from "../../contexts/taskContext";
+import { useSelector } from "react-redux";
+import { getTasks } from "../../redux/selectors";
 
 export const TaskCounter = () => {
-  const { tasksActive, tasksCompleted } = useTask();
+  const tasks = useSelector(getTasks);
+
+  const count = tasks.reduce(
+    (acc, task) => {
+      if (task.completed) {
+        acc.completed += 1;
+      } else {
+        acc.active += 1;
+      }
+      return acc;
+    },
+    { active: 0, completed: 0 }
+  );
 
   return (
     <div>
-      <p className={styles.text}>Active: {tasksActive.length}</p>
-      <p className={styles.text}>Completed: {tasksCompleted.length}</p>
+      <p className={styles.text}>Active: {count.active}</p>
+      <p className={styles.text}>Completed: {count.completed}</p>
     </div>
   );
 };

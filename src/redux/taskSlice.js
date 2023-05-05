@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { tasksInitialState } from "./reducer";
 import { nanoid } from "nanoid";
-import { fetchTasks } from "./operations";
+import { addTask, fetchTasks, toggleCompleted } from "./operations";
 
 export const tasksSlice = createSlice({
   name: "tasks",
@@ -62,10 +62,39 @@ export const tasksSlice = createSlice({
     [fetchTasks.rejected](state, action) {
       state.isLoading = false;
       state.error = action.payload;
-      state.items = [];
+      // state.items = [];
+    },
+    [addTask.pending](state, action) {
+      state.isLoading = true;
+    },
+    [addTask.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      state.items.push(action.payload);
+    },
+    [addTask.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [toggleCompleted.pending](state, action) {
+      state.isLoading = true;
+    },
+    [toggleCompleted.fulfilled](state, action) {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.items.findIndex(
+        (task) => task.id === action.payload.id
+      );
+      state.items[index].completed = !state.items[index].completed;
+    },
+    [toggleCompleted.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
     },
   },
 });
+
+// put changing element and when there is no element for example Tomek, it will add this and PATCH when there is no element won't add this, just leave (change nothing)
 
 // export const { addTask, deleteTask, toggleCompleted } = tasksSlice.actions;
 export const tasksReducer = tasksSlice.reducer;
