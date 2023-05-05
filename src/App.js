@@ -6,15 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 // import { getTasks } from "./redux/selectors";
 import { useEffect } from "react";
 import { fetchTasks } from "./redux/operations";
-import { getError, getIsLoading } from "./redux/selectors";
+import { selectError, selectIsLoading } from "./redux/selectors";
 
 // in selectors there is getTasks. it takes state.tasks from store.js in reducer and tasks are from taskSlice from initial state
 
 const App = () => {
   // Dispatch is activated only once, but I use it in useEffect becouse I should put in ended array all const used in it. No matter if I don't use it, but it will be warning
   const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
   // const { items, isLoading, error } = useSelector(getTasks);
 
   useEffect(() => {
